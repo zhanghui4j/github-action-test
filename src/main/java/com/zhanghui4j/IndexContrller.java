@@ -8,6 +8,6 @@ public class IndexContrller {
 
     @GetMapping
     public String index() {
-        return "github action test";
+        return "github action test ";
     }
 }
