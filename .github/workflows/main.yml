@@ -1,16 +1,20 @@
-name: Publish package to the GitHub Packages
+# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
+
+name: Maven Package
+
 on:
+  # 监听push tag事件,且匹配tag是v开头的
   push:
     tags:
-      - "v*"
-#    branches: [ release ]
+      - 'v*'
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+    permissions: write-all
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 8
@@ -47,22 +51,3 @@ jobs:
           # Assets to upload to the release
           files: |
             staging/*.jar
-
-
-#jobs:
-#  publish:
-#    runs-on: ubuntu-latest
-#    permissions:
-#      contents: read
-#      packages: write
-#    steps:
-#      - uses: actions/checkout@v3
-#      - name: Set up Java for publishing to GitHub Packages
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: '11'
-#          distribution: 'adopt'
-#      - name: Publish to GitHub Packages
-#        run: mvn --batch-mode deploy
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.TOKEN }}
