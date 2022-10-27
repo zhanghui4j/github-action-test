@@ -26,7 +26,7 @@ jobs:
 
       - name: Build with Maven
         # 执行打包的mvn命令
-        run: mvn -B compile assembly:single --file pom.xml
+        run: mvn clean install
 
       # 移动打包文件
       - run: mkdir staging && cp target/*.jar staging
